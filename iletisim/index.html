@@ -20,7 +20,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap">
-<link rel="stylesheet" href="/varliklar/site.css?v=muv7hkmd">
+<link rel="stylesheet" href="/varliklar/site.css?v=muv88uk4">
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Ana sayfa","item":"https://hafizada.com/"},{"@type":"ListItem","position":2,"name":"İletişim","item":"https://hafizada.com/iletisim/"}]}</script>
 </head>
 <body>
@@ -75,10 +75,22 @@
       <p class="ust">Bir öneri, bir hata ya da aklına takılan bir kelime… Mesajın doğrudan bize ulaşır, en kısa sürede dönüş yaparız.</p>
       <p class="ust">Instagram'dan da yazabilirsin: <a href="https://www.instagram.com/hafizadaingilizce" target="_blank" rel="noopener"><b>@hafizadaingilizce</b></a></p>
     </div>
-<div class="form-yerine">
-  <p>Mesajını e-postayla gönderebilirsin; doğrudan bize ulaşır.</p>
-  <a class="btn btn-sari" href="mailto:hasanozdemiryz@gmail.com?subject=Hafızada%20İngilizce">E-posta gönder</a>
-</div>
+<form class="form" data-iletisim novalidate>
+  <label>Adın
+    <input name="ad" autocomplete="name" maxlength="80" required>
+  </label>
+  <label>E-posta adresin
+    <input name="eposta" type="email" autocomplete="email" maxlength="160" required>
+  </label>
+  <label>Mesajın
+    <textarea name="mesaj" maxlength="4000" required></textarea>
+  </label>
+  <label class="bal" aria-hidden="true">Bu alanı boş bırak
+    <input name="web" tabindex="-1" autocomplete="off">
+  </label>
+  <button class="btn btn-sari" type="submit">Gönder</button>
+  <p class="durum" role="status" aria-live="polite"></p>
+</form>
 
   </div>
 </section>
@@ -166,6 +178,54 @@
       a.textContent = 'Devam et';
     });
   } catch (e) {}
+})();
+</script>
+<script>
+(function () {
+  /*
+    ILETISIM FORMU. Mesaj Supabase'deki `iletisim` islevine gidiyor; islev
+    kaydi tutuyor ve e-postayla iletiyor (bkz. supabase/functions/iletisim).
+    `web` alani gorunmez bir tuzak: insan doldurmaz, bot doldurur.
+  */
+  var ADRES = 'https://safbupshatjmfxdviwvp.supabase.co/functions/v1/iletisim';
+  document.querySelectorAll('form[data-iletisim]').forEach(function (form) {
+    var durum = form.querySelector('.durum');
+    var dugme = form.querySelector('button[type=submit]');
+    var yaz = function (metin, iyi) {
+      durum.textContent = metin;
+      durum.className = 'durum ' + (iyi ? 'iyi' : 'kotu');
+    };
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      var v = {
+        ad: form.ad.value.trim(),
+        eposta: form.eposta.value.trim(),
+        mesaj: form.mesaj.value.trim(),
+        web: form.web.value,
+        sayfa: location.pathname
+      };
+      if (!v.ad || !v.mesaj) return yaz('Adını ve mesajını yazman gerekiyor.', false);
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v.eposta)) return yaz('E-posta adresin geçerli görünmüyor.', false);
+      dugme.disabled = true;
+      dugme.textContent = 'Gönderiliyor…';
+      fetch(ADRES, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(v) })
+        .then(function (r) {
+          if (r.status === 429) throw new Error('cok');
+          if (!r.ok) throw new Error('hata');
+          form.reset();
+          yaz('Teşekkürler, mesajın bize ulaştı. En kısa sürede dönüş yapacağız.', true);
+        })
+        .catch(function (err) {
+          yaz(err.message === 'cok'
+            ? 'Kısa sürede çok mesaj gönderildi. Biraz sonra tekrar dene.'
+            : 'Mesaj gönderilemedi. Biraz sonra tekrar dene ya da Instagram\'dan yaz.', false);
+        })
+        .finally(function () {
+          dugme.disabled = false;
+          dugme.textContent = 'Gönder';
+        });
+    });
+  });
 })();
 </script>
 
