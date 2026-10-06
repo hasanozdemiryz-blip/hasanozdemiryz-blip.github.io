@@ -7,10 +7,12 @@
 <meta name="description" content="Eye Türkçede “göz” demek. eye ≈ ay kancasıyla akılda kalır: “Gözü ay gibi parlıyor” Görselli ve sesli öğren.">
 <link rel="canonical" href="https://hafizada.com/kelime/eye/">
 <meta name="theme-color" content="#16233a">
-<link rel="icon" href="/varliklar/logo.svg" type="image/svg+xml">
+<link rel="icon" href="/favicon.ico" sizes="48x48">
+<link rel="icon" href="/varliklar/favicon-96x96.png" type="image/png" sizes="96x96">
 <link rel="apple-touch-icon" href="/varliklar/apple-touch-icon.png">
 <meta property="og:site_name" content="Hafızada İngilizce">
 <meta property="og:locale" content="tr_TR">
+
 <meta property="og:title" content="Eye ne demek? Türkçe anlamı “göz” — Hafızada İngilizce">
 <meta property="og:description" content="Eye Türkçede “göz” demek. eye ≈ ay kancasıyla akılda kalır: “Gözü ay gibi parlıyor” Görselli ve sesli öğren.">
 <meta property="og:type" content="article">
@@ -20,7 +22,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap">
-<link rel="stylesheet" href="/varliklar/site.css?v=muwmj7rh">
+<link rel="stylesheet" href="/varliklar/site.css?v=mux5p7h6">
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Ana sayfa","item":"https://hafizada.com/"},{"@type":"ListItem","position":2,"name":"Kelimeler","item":"https://hafizada.com/kelimeler/"},{"@type":"ListItem","position":3,"name":"eye","item":"https://hafizada.com/kelime/eye/"}]}</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"DefinedTerm","name":"eye","description":"göz — eye ≈ ay: Gözü ay gibi parlıyor","url":"https://hafizada.com/kelime/eye/","inLanguage":"en","image":"https://hafizada.com/varliklar/kelimeler/eye.webp","inDefinedTermSet":{"@type":"DefinedTermSet","name":"Hafızada İngilizce kelime listesi","url":"https://hafizada.com/kelimeler/"}}</script>
 </head>
@@ -28,6 +30,10 @@
 
 <div class="serit">
   <div class="kap">
+    <div class="dil" role="group" aria-label="Dil / Language">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9.5"/><path d="M2.5 12h19"/><path d="M12 2.5c2.6 2.7 3.9 5.9 3.9 9.5s-1.3 6.8-3.9 9.5c-2.6-2.7-3.9-5.9-3.9-9.5s1.3-6.8 3.9-9.5z"/></svg>
+      <span class="dil-kutu"><a href="/kelime/eye/" hreflang="tr" lang="tr" title="Türkçe" data-dil="tr" aria-current="true">TR</a><a href="/en/" hreflang="en" lang="en" title="English" data-dil="en">EN</a></span>
+    </div>
     <span>Ücretsiz</span>
     <a href="/ingilizce/?giris=1" data-giris>Giriş yap</a>
   </div>
@@ -49,7 +55,7 @@
       <a href="/#sss">SSS</a>
       <a href="/iletisim/">İletişim</a>
     </nav>
-    <span class="ust-cta"><a class="btn btn-sari" href="/ingilizce/" data-basla>Hemen başla</a></span>
+    <span class="ust-cta"><a class="btn btn-sari" href="/ingilizce/?basla=1" data-basla>Hemen başla</a></span>
     <button class="menu-dugme" type="button" aria-expanded="false" aria-controls="mobil-menu">Menü</button>
   </div>
   <nav class="mobil-menu" id="mobil-menu" aria-label="Menü">
@@ -86,7 +92,7 @@
     </div>
       <div class="cagri">
         <p>eye ve 265 kelime daha uygulamada kancası ve görseliyle seni bekliyor.</p>
-        <a class="btn btn-lacivert" href="/ingilizce/" data-basla>Hemen başla</a>
+        <a class="btn btn-lacivert" href="/ingilizce/?basla=1" data-basla>Hemen başla</a>
       </div>
     </div>
   </div>
@@ -118,7 +124,7 @@
     </div>
     <nav aria-label="Uygulama">
       <h3>Uygulama</h3>
-      <a href="/ingilizce/" data-basla>Hemen başla</a>
+      <a href="/ingilizce/?basla=1" data-basla>Hemen başla</a>
       <a href="/ingilizce/?giris=1" data-giris>Giriş yap</a>
       <a href="/#yontem">Nasıl çalışıyor?</a>
       <a href="/#neden">Neden işe yarıyor?</a>
@@ -158,6 +164,22 @@
   }
 
   /*
+    DIL. Site ile uygulama ayni adreste, yani ayni depoyu goruyor:
+    secicide dil degisince uygulama da o dilde acilsin (`hafizada-dil`,
+    bkz. src/dil.ts). Ingilizce sayfadan uygulamaya gecen de Ingilizce
+    arayuzle karsilansin. Turkce sayfa kayitli secime dokunmuyor.
+  */
+  var dilYaz = function (d) { try { localStorage.setItem('hafizada-dil', d); } catch (e) {} };
+  document.querySelectorAll('[data-dil]').forEach(function (a) {
+    a.addEventListener('click', function () { dilYaz(a.getAttribute('data-dil')); });
+  });
+  if (document.documentElement.lang === 'en') {
+    document.querySelectorAll('[data-basla],[data-giris]').forEach(function (a) {
+      a.addEventListener('click', function () { dilYaz('en'); });
+    });
+  }
+
+  /*
     GIRISLI MI. Site ile uygulama ayni adreste (hafizada.com/ingilizce/),
     yani uygulamanin oturum anahtari burada da okunabiliyor. Girisli
     kullaniciya "Giris yap" yerine "Uygulamaya don" gosteriliyor; girdigi
@@ -170,15 +192,17 @@
       if (/^sb-.+-auth-token$/.test(k)) { anahtar = k; break; }
     }
     if (!anahtar) return;
+    var en = document.documentElement.lang === 'en';
     var oturum = JSON.parse(localStorage.getItem(anahtar));
     var m = (oturum && oturum.user && oturum.user.user_metadata) || {};
     var ad = String(m.ad || m.full_name || m.name || '').split(' ')[0];
     document.querySelectorAll('[data-giris]').forEach(function (a) {
       a.href = '/ingilizce/';
-      a.textContent = ad ? 'Uygulamaya dön · ' + ad : 'Uygulamaya dön';
+      var don = en ? 'Back to the app' : 'Uygulamaya dön';
+      a.textContent = ad ? don + ' · ' + ad : don;
     });
     document.querySelectorAll('[data-basla]').forEach(function (a) {
-      a.textContent = 'Devam et';
+      a.textContent = en ? 'Continue' : 'Devam et';
     });
   } catch (e) {}
 })();
