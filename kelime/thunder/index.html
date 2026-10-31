@@ -23,7 +23,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap">
-<link rel="stylesheet" href="/varliklar/site.css?v=mvf2t7yc">
+<link rel="stylesheet" href="/varliklar/site.css?v=mvwfti1p">
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Ana sayfa","item":"https://hafizada.com/"},{"@type":"ListItem","position":2,"name":"Kelimeler","item":"https://hafizada.com/kelimeler/"},{"@type":"ListItem","position":3,"name":"thunder","item":"https://hafizada.com/kelime/thunder/"}]}</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"DefinedTerm","name":"thunder","description":"gök gürültüsü — thunder ≈ tandır: Tandırdan gümbürtü geliyor","url":"https://hafizada.com/kelime/thunder/","inLanguage":"en","image":"https://hafizada.com/varliklar/kelimeler/thunder.webp","inDefinedTermSet":{"@type":"DefinedTermSet","name":"Hafızada İngilizce kelime listesi","url":"https://hafizada.com/kelimeler/"}}</script>
 </head>
@@ -57,8 +57,8 @@
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9.5"/><path d="M2.5 12h19"/><path d="M12 2.5c2.6 2.7 3.9 5.9 3.9 9.5s-1.3 6.8-3.9 9.5c-2.6-2.7-3.9-5.9-3.9-9.5s1.3-6.8 3.9-9.5z"/></svg>
       <span class="dil-kutu"><a href="/kelime/thunder/" hreflang="tr" lang="tr" title="Türkçe" data-dil="tr" aria-current="true">TR</a><a href="/en/" hreflang="en" lang="en" title="English" data-dil="en">EN</a></span>
     </div>
-      <a class="ust-giris" href="/ingilizce/?giris=1" data-giris>Giriş yap</a>
-      <span class="ust-cta"><a class="btn btn-sari" href="/ingilizce/?basla=1" data-basla>Hemen başla</a></span>
+      <a class="ust-giris" href="/ingilizce/?giris=1&amp;bolum=genel" data-giris>Giriş yap</a>
+      <span class="ust-cta"><a class="btn btn-sari" href="/ingilizce/?basla=1&amp;bolum=genel" data-basla>Hemen başla</a></span>
       <button class="menu-dugme" type="button" aria-expanded="false" aria-controls="mobil-menu">Menü</button>
     </div>
   </div>
@@ -68,7 +68,7 @@
       <a href="/blog/">Blog</a>
       <a href="/#sss">SSS</a>
       <a href="/iletisim/">İletişim</a>
-      <a href="/ingilizce/?giris=1" data-giris>Giriş yap</a>
+      <a href="/ingilizce/?giris=1&amp;bolum=genel" data-giris>Giriş yap</a>
     <div class="dil" role="group" aria-label="Dil / Language">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9.5"/><path d="M2.5 12h19"/><path d="M12 2.5c2.6 2.7 3.9 5.9 3.9 9.5s-1.3 6.8-3.9 9.5c-2.6-2.7-3.9-5.9-3.9-9.5s1.3-6.8 3.9-9.5z"/></svg>
       <span class="dil-kutu"><a href="/kelime/thunder/" hreflang="tr" lang="tr" title="Türkçe" data-dil="tr" aria-current="true">TR</a><a href="/en/" hreflang="en" lang="en" title="English" data-dil="en">EN</a></span>
@@ -110,7 +110,7 @@
       </div>
       <div class="cagri">
         <p>thunder ve 398 kelime daha platformda çağrışımı ve görseliyle seni bekliyor.</p>
-        <a class="btn btn-lacivert" href="/ingilizce/?basla=1" data-basla>Hemen başla</a>
+        <a class="btn btn-lacivert" href="/ingilizce/?basla=1&amp;bolum=genel" data-basla>Hemen başla</a>
       </div>
     </div>
   </div>
@@ -142,8 +142,8 @@
     </div>
     <nav aria-label="Platform">
       <h3>Platform</h3>
-      <a href="/ingilizce/?basla=1" data-basla>Hemen başla</a>
-      <a href="/ingilizce/?giris=1" data-giris>Giriş yap</a>
+      <a href="/ingilizce/?basla=1&amp;bolum=genel" data-basla>Hemen başla</a>
+      <a href="/ingilizce/?giris=1&amp;bolum=genel" data-giris>Giriş yap</a>
       <a href="/#yontem">Nasıl çalışıyor?</a>
       <a href="/#neden">Neden işe yarıyor?</a>
     </nav>
@@ -207,10 +207,24 @@
   var dugme = document.querySelector('.menu-dugme');
   var menu = document.getElementById('mobil-menu');
   if (dugme && menu) {
-    dugme.addEventListener('click', function () {
+    var kapat = function () {
+      menu.classList.remove('acik');
+      dugme.setAttribute('aria-expanded', 'false');
+    };
+    dugme.addEventListener('click', function (e) {
+      e.stopPropagation();
       var acik = menu.classList.toggle('acik');
       dugme.setAttribute('aria-expanded', acik ? 'true' : 'false');
     });
+    /*
+      Bir maddeye dokununca menu kapanir (31 Ekim). Ozellikle ayni sayfadaki
+      #bolum baglantilarinda sayfa degismiyor, menu acik kalip icerigi
+      kapatiyordu; geri tusuyla donuste de (bfcache) acik geliyordu.
+    */
+    menu.addEventListener('click', function (e) { if (e.target.closest('a')) kapat(); });
+    document.addEventListener('click', function (e) { if (!menu.contains(e.target)) kapat(); });
+    document.addEventListener('keydown', function (e) { if (e.key === 'Escape') kapat(); });
+    window.addEventListener('pageshow', kapat);
   }
 
   /*
@@ -253,7 +267,9 @@
     document.documentElement.classList.add('girisli');
     var don = en ? 'Back to lessons' : 'Derslerime dön';
     document.querySelectorAll('[data-giris]').forEach(function (a) {
-      a.href = '/ingilizce/';
+      // Girisli de bulundugu sekmenin bolumune doner (platformda bolum gecisi yok).
+      var b = document.body.getAttribute('data-bolum');
+      a.href = b === 'lgs' || b === 'genel' ? '/ingilizce/?bolum=' + b : '/ingilizce/';
       a.textContent = don;
     });
     // Ustteki giris baglantisi yalniz telefonda gorunuyor; 375 px'te kisa ad sigiyor.
