@@ -23,7 +23,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap">
-<link rel="stylesheet" href="/varliklar/site.css?v=mvwfti1p">
+<link rel="stylesheet" href="/varliklar/site.css?v=mvwk4zyq">
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Ana sayfa","item":"https://hafizada.com/"},{"@type":"ListItem","position":2,"name":"Gizlilik Politikası","item":"https://hafizada.com/gizlilik/"}]}</script>
 </head>
 <body data-bolum="genel">
@@ -84,7 +84,7 @@
   </div>
 </section>
 <div class="kap"><article class="metin">
-<p class="ustbilgi">Hafızada İngilizce · Yürürlük tarihi: 5 Ekim 2026</p>
+<p class="ustbilgi">Hafızada İngilizce · Yürürlük tarihi: 5 Ekim 2026 · Son güncelleme: 31 Ekim 2026</p>
 
 <div class="vurgu">
   <p>
@@ -161,8 +161,9 @@
 <p>
   Uygulamanın nerede işe yaradığını, nerede takıldığını anlayabilmek için
   <strong>kendi sunucumuzda</strong> (Supabase altyapısı) tuttuğumuz bir tabloya
-  anonim kullanım olayları yazıyoruz. Üçüncü taraf bir analitik hizmeti, reklam
-  ağı veya izleyici (tracker) kullanılmaz.
+  anonim kullanım olayları yazıyoruz. Reklam ağı kullanılmaz. Tek üçüncü taraf ölçüm
+  aracı, yalnızca <strong>izin verirsen</strong> çalışan Microsoft Clarity'dir
+  (bkz. <a href="#cerezler">Çerezler</a>).
 </p>
 
 <h3>Gönderilen olaylar</h3>
@@ -225,13 +226,29 @@
 <h2>8. Reklam yok, satış yok</h2>
 <p>
   Uygulamada reklam gösterilmez. Hiçbir veri satılmaz, kiralanmaz veya pazarlama
-  amacıyla üçüncü taraflarla paylaşılmaz. Analitik dışında üçüncü taraf izleyici
-  (tracker) kullanılmaz.
+  amacıyla üçüncü taraflarla paylaşılmaz. İzin verdiğinde çalışan Microsoft Clarity
+  dışında üçüncü taraf izleyici (tracker) kullanılmaz.
 </p>
 
-<h2>9. Çerezler</h2>
+<h2 id="cerezler">9. Çerezler ve Microsoft Clarity</h2>
 <p>
-  Web sürümünde takip amaçlı çerez kullanılmaz. Uygulamanın çalışması için
+  Sitede ve platformda, <strong>yalnızca alttaki çerez şeridinde “Kabul et” dersen</strong>,
+  Microsoft Clarity çalışır. Clarity sayfada nereye tıklandığını, sayfanın ne kadar
+  kaydırıldığını, hangi sayfada çıkıldığını ve bunların anonim oturum kaydını tutar;
+  bunun için çerez ve benzeri tanımlayıcılar kullanır. Amaç siteyi ve platformu
+  kullanımı kolay hâle getirmektir; reklam için kullanılmaz. Form alanlarına ve
+  şifrelere yazdıkların kayda girmez (maskelenir). Clarity, Microsoft Corporation
+  tarafından sağlanır ve veriler ABD'deki sunucularda işlenebilir. Ayrıntı:
+  <a href="https://privacy.microsoft.com/tr-tr/privacystatement" target="_blank" rel="noopener">Microsoft Gizlilik Bildirimi</a>.
+</p>
+<p>
+  “Reddet” dersen ya da hiçbir seçim yapmazsan Clarity hiç yüklenmez. Kararını
+  sayfanın en altındaki <strong>Çerez tercihleri</strong> bağlantısından istediğin an
+  değiştirebilirsin; platformda ayrıca <strong>Ayarlar → Kullanım istatistikleri</strong>
+  kapatılınca Clarity de çalışmaz.
+</p>
+<p>
+  Bunun dışında takip amaçlı çerez kullanılmaz. Uygulamanın çalışması için
   tarayıcının yerel depolama alanları (IndexedDB, Cache Storage, Local Storage)
   kullanılır. Giriş yaptıysan oturumunun açık kalması için bir oturum anahtarı da
   bu alanda tutulur.
@@ -309,6 +326,7 @@
       <a href="/gizlilik/">Gizlilik Politikası</a>
       <a href="/kullanim-kosullari/">Kullanım Koşulları</a>
       <a href="/kvkk/">KVKK Aydınlatma Metni</a>
+      <a href="#" data-cerez-ac hidden>Çerez tercihleri</a>
     </nav>
   </div>
   <div class="kap alt-cizgi">
@@ -430,6 +448,54 @@
       a.textContent = en ? 'Continue' : 'Devam et';
     });
   } catch (e) {}
+})();
+</script>
+<div class="cerez-serit" id="cerez-serit" role="dialog" aria-live="polite" aria-label="Çerez tercihleri" hidden>
+  <p>Siteyi ve platformu geliştirmek için, izin verirsen Microsoft Clarity ile sayfada nereye tıklandığını ve nerede çıkıldığını anonim olarak kaydediyoruz. Reklam için kullanılmaz. <a href="/gizlilik/#cerezler">Ayrıntı</a></p>
+  <div class="cerez-dugmeler">
+    <button type="button" class="btn btn-beyaz" data-cerez="hayir">Reddet</button>
+    <button type="button" class="btn btn-lacivert" data-cerez="evet">Kabul et</button>
+  </div>
+</div>
+<script>
+/*
+  CEREZ ONAYI + MICROSOFT CLARITY (31 Ekim). Clarity (isi haritasi, oturum
+  kaydi) ucuncu taraf ve yurt disina aktarim: YALNIZ "Kabul et" denirse
+  yuklenir. Secim `hafizada-cerez`te; platform da ayni adreste ayni secimi
+  okuyor (src/clarity.ts). Kimlik bossa (clarity.config.json) serit de cikmaz.
+*/
+(function () {
+  var ID = '';
+  if (!ID) return;
+  var A = 'hafizada-cerez';
+  var serit = document.getElementById('cerez-serit');
+  var oku = function () { try { return localStorage.getItem(A); } catch (e) { return 'hayir'; } };
+  var yaz = function (v) { try { localStorage.setItem(A, v); } catch (e) {} };
+  var yukle = function () {
+    if (window.clarity) return;
+    (function (c, l, a, r, i, t, y) {
+      c[a] = c[a] || function () { (c[a].q = c[a].q || []).push(arguments); };
+      t = l.createElement(r); t.async = 1; t.src = 'https://www.clarity.ms/tag/' + i;
+      y = l.getElementsByTagName(r)[0]; y.parentNode.insertBefore(t, y);
+    })(window, document, 'clarity', 'script', ID);
+    window.clarity('set', 'alan', 'site');
+  };
+  document.querySelectorAll('[data-cerez-ac]').forEach(function (a) {
+    a.hidden = false;
+    a.addEventListener('click', function (e) { e.preventDefault(); serit.hidden = false; });
+  });
+  serit.querySelectorAll('[data-cerez]').forEach(function (b) {
+    b.addEventListener('click', function () {
+      var v = b.getAttribute('data-cerez');
+      yaz(v);
+      serit.hidden = true;
+      if (v === 'evet') yukle();
+      // Onay geri alindiysa Clarity'nin bu sayfada calismasi durmaz; bir sonraki sayfada yuklenmez.
+    });
+  });
+  var secim = oku();
+  if (secim === 'evet') yukle();
+  else if (secim !== 'hayir') serit.hidden = false;
 })();
 </script>
 

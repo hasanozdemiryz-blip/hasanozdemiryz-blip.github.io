@@ -23,7 +23,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap">
-<link rel="stylesheet" href="/varliklar/site.css?v=mvwfti1p">
+<link rel="stylesheet" href="/varliklar/site.css?v=mvwk4zyq">
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Ana sayfa","item":"https://hafizada.com/"},{"@type":"ListItem","position":2,"name":"Blog","item":"https://hafizada.com/blog/"},{"@type":"ListItem","position":3,"name":"LGS İngilizce: hangi üniteden kaç kelime çıktı? (2018–2025)","item":"https://hafizada.com/blog/lgs-ingilizce-hangi-uniteden-kac-kelime-cikti/"}]}</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"LGS İngilizcede kaç soru var?","acceptedAnswer":{"@type":"Answer","text":"LGS'de yabancı dil testi 10 sorudan oluşuyor ve sözel bölümde, Türkçe, T.C. İnkılap Tarihi ve Din Kültürü ile birlikte soruluyor."}},{"@type":"Question","name":"Hangi ünite daha önemli?","acceptedAnswer":{"@type":"Answer","text":"2018–2025 sınavlarında en çok kelime Friendship (35), In the Kitchen (34) ve Science (29) ünitelerinden çıktı. Yine de her yıl her üniteden soru gelebiliyor; hiçbir üniteyi atlama."}},{"@type":"Question","name":"Bu sayım nasıl yapıldı?","acceptedAnswer":{"@type":"Answer","text":"MEB'in yayımladığı 2018–2025 LGS kitapçıklarının İngilizce bölümündeki metinleri taradık ve platformdaki 1.137 LGS kelimesi ile kalıbının her birinin kaç sınavda geçtiğini saydık. Çekimli halleri (invited, inviting) de sayıldı."}},{"@type":"Question","name":"2027 LGS hangi programla yapılacak?","acceptedAnswer":{"@type":"Answer","text":"2027 LGS'ye girecek öğrenciler 8. sınıfın bugünkü 10 üniteli programını okuyor. 2028'de yeni Maarif programı 8. sınıfa geliyor."}}]}</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"LGS İngilizce: hangi üniteden kaç kelime çıktı? (2018–2025)","description":"2018–2025 arasındaki 8 LGS'nin İngilizce sorularını taradık: 10 ünitenin her birinden kaç kelime çıktı, en çok tekrar eden kelimeler hangileri, 2027 için hangi üniteye ağırlık verilmeli.","datePublished":"2026-10-31","dateModified":"2026-10-31","inLanguage":"tr","mainEntityOfPage":"https://hafizada.com/blog/lgs-ingilizce-hangi-uniteden-kac-kelime-cikti/","image":"https://hafizada.com/varliklar/og.png","author":{"@type":"Organization","name":"Hafızada İngilizce","url":"https://hafizada.com/"},"publisher":{"@context":"https://schema.org","@type":"Organization","name":"Hafızada İngilizce","url":"https://hafizada.com/","logo":"https://hafizada.com/varliklar/logo-512.png","sameAs":["https://www.instagram.com/hafizadaingilizce"]}}</script>
@@ -205,6 +205,7 @@
       <a href="/gizlilik/">Gizlilik Politikası</a>
       <a href="/kullanim-kosullari/">Kullanım Koşulları</a>
       <a href="/kvkk/">KVKK Aydınlatma Metni</a>
+      <a href="#" data-cerez-ac hidden>Çerez tercihleri</a>
     </nav>
   </div>
   <div class="kap alt-cizgi">
@@ -326,6 +327,54 @@
       a.textContent = en ? 'Continue' : 'Devam et';
     });
   } catch (e) {}
+})();
+</script>
+<div class="cerez-serit" id="cerez-serit" role="dialog" aria-live="polite" aria-label="Çerez tercihleri" hidden>
+  <p>Siteyi ve platformu geliştirmek için, izin verirsen Microsoft Clarity ile sayfada nereye tıklandığını ve nerede çıkıldığını anonim olarak kaydediyoruz. Reklam için kullanılmaz. <a href="/gizlilik/#cerezler">Ayrıntı</a></p>
+  <div class="cerez-dugmeler">
+    <button type="button" class="btn btn-beyaz" data-cerez="hayir">Reddet</button>
+    <button type="button" class="btn btn-lacivert" data-cerez="evet">Kabul et</button>
+  </div>
+</div>
+<script>
+/*
+  CEREZ ONAYI + MICROSOFT CLARITY (31 Ekim). Clarity (isi haritasi, oturum
+  kaydi) ucuncu taraf ve yurt disina aktarim: YALNIZ "Kabul et" denirse
+  yuklenir. Secim `hafizada-cerez`te; platform da ayni adreste ayni secimi
+  okuyor (src/clarity.ts). Kimlik bossa (clarity.config.json) serit de cikmaz.
+*/
+(function () {
+  var ID = '';
+  if (!ID) return;
+  var A = 'hafizada-cerez';
+  var serit = document.getElementById('cerez-serit');
+  var oku = function () { try { return localStorage.getItem(A); } catch (e) { return 'hayir'; } };
+  var yaz = function (v) { try { localStorage.setItem(A, v); } catch (e) {} };
+  var yukle = function () {
+    if (window.clarity) return;
+    (function (c, l, a, r, i, t, y) {
+      c[a] = c[a] || function () { (c[a].q = c[a].q || []).push(arguments); };
+      t = l.createElement(r); t.async = 1; t.src = 'https://www.clarity.ms/tag/' + i;
+      y = l.getElementsByTagName(r)[0]; y.parentNode.insertBefore(t, y);
+    })(window, document, 'clarity', 'script', ID);
+    window.clarity('set', 'alan', 'site');
+  };
+  document.querySelectorAll('[data-cerez-ac]').forEach(function (a) {
+    a.hidden = false;
+    a.addEventListener('click', function (e) { e.preventDefault(); serit.hidden = false; });
+  });
+  serit.querySelectorAll('[data-cerez]').forEach(function (b) {
+    b.addEventListener('click', function () {
+      var v = b.getAttribute('data-cerez');
+      yaz(v);
+      serit.hidden = true;
+      if (v === 'evet') yukle();
+      // Onay geri alindiysa Clarity'nin bu sayfada calismasi durmaz; bir sonraki sayfada yuklenmez.
+    });
+  });
+  var secim = oku();
+  if (secim === 'evet') yukle();
+  else if (secim !== 'hayir') serit.hidden = false;
 })();
 </script>
 
