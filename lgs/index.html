@@ -23,7 +23,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap">
-<link rel="stylesheet" href="/varliklar/site.css?v=mw17top1">
+<link rel="stylesheet" href="/varliklar/site.css?v=mw6b83qb">
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Ana sayfa","item":"https://hafizada.com/"},{"@type":"ListItem","position":2,"name":"LGS","item":"https://hafizada.com/lgs/"}]}</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"LGS İngilizce için kaç kelime öğrenmem gerekiyor?","acceptedAnswer":{"@type":"Answer","text":"Platformda 10 ünitede toplam 1137 kelime ve kalıp var: ders kitaplarının sözlükleri, ünitelerin okuma ve diyalog metinleri ve 2018–2025 LGS sorularında geçen temel kelimeler. Son 8 LGS'nin İngilizce sorularındaki kelimelerin %95'ten fazlası bu listede. Hepsini ünite ünite burada bulabilirsin."}},{"@type":"Question","name":"Hangi yılın müfredatı?","acceptedAnswer":{"@type":"Answer","text":"2027 LGS 8. sınıfın bugünkü programıyla yapılacak: 10 ünite (Friendship'ten Natural Forces'a). 2028'de yeni Maarif programı başlıyor; kelimelerin çoğu aynı, gruplama değişiyor. Biz ikisini de takip ediyoruz."}},{"@type":"Question","name":"Hafıza tekniği ne demek?","acceptedAnswer":{"@type":"Answer","text":"Kelimenin sesi ya da yazılışı Türkçe bir kelimeyi çağrıştırıyor: succeed ≈ saksı, delicious içinde \"deli\". Çağrışımı anlamla aynı sahneye koyuyoruz (\"Deli aşçının yemeği lezzetli çıktı\"). Sahne aklına gelince anlam da geliyor."}},{"@type":"Question","name":"Ücretli mi?","acceptedAnswer":{"@type":"Answer","text":"Hayır, şu an her şey ücretsiz ve reklamsız."}},{"@type":"Question","name":"Sınav tarihi ne zaman?","acceptedAnswer":{"@type":"Answer","text":"Resmi tarih henüz açıklanmadı. Önceki yıllara göre tahmin: 12 Haziran 2027 (tahmini; MEB kılavuzu açıklanınca güncellenecek)."}}]}</script>
 </head>
@@ -383,7 +383,7 @@
 })();
 </script>
 <div class="cerez-serit" id="cerez-serit" role="dialog" aria-live="polite" aria-label="Çerez tercihleri" hidden>
-  <p>Siteyi ve platformu geliştirmek için, izin verirsen Microsoft Clarity ile sayfada nereye tıklandığını ve nerede çıkıldığını anonim olarak kaydediyoruz. Reklam için kullanılmaz. <a href="/gizlilik/#cerezler">Ayrıntı</a></p>
+  <p>Size daha iyi bir deneyim sunmak için çerezler kullanıyoruz. <a href="/gizlilik/#cerezler">Çerez Politikası</a></p>
   <div class="cerez-dugmeler">
     <button type="button" class="btn btn-beyaz" data-cerez="hayir">Reddet</button>
     <button type="button" class="btn btn-lacivert" data-cerez="evet">Kabul et</button>
@@ -391,20 +391,31 @@
 </div>
 <script>
 /*
-  CEREZ ONAYI + MICROSOFT CLARITY (31 Ekim). Clarity (isi haritasi, oturum
-  kaydi) ucuncu taraf ve yurt disina aktarim: YALNIZ "Kabul et" denirse
-  yuklenir. Secim `hafizada-cerez`te; platform da ayni adreste ayni secimi
-  okuyor (src/clarity.ts). Kimlik bossa (clarity.config.json) serit de cikmaz.
+  CEREZ SERIDI + MICROSOFT CLARITY + META PIKSELI.
+  7 Kasim (kullanici karari): olcum secim yapmayanda da calisir, yalniz
+  "Reddet" (hayir) durdurur; serit kisa ve standart, secim yapilana kadar
+  altta durur. Secim `hafizada-cerez`te; platform da ayni adreste ayni secimi
+  okuyor (src/clarity.ts, src/pixel.ts). Iki kimlik de bossa serit cikmaz.
 */
 (function () {
   var ID = 'z6e5yzcie8';
-  if (!ID || /^(localhost|127.0.0.1)$/.test(location.hostname)) return;
+  var PIXEL = '1903002600498688';
+  if ((!ID && !PIXEL) || /^(localhost|127.0.0.1)$/.test(location.hostname)) return;
   var A = 'hafizada-cerez';
   var serit = document.getElementById('cerez-serit');
   var oku = function () { try { return localStorage.getItem(A); } catch (e) { return 'hayir'; } };
   var yaz = function (v) { try { localStorage.setItem(A, v); } catch (e) {} };
   var yukle = function () {
-    if (window.clarity) return;
+    if (PIXEL && !window.fbq) {
+      !function (f, b, e, v, n, t, s) {
+        if (f.fbq) return; n = f.fbq = function () { n.callMethod ? n.callMethod.apply(n, arguments) : n.queue.push(arguments); };
+        if (!f._fbq) f._fbq = n; n.push = n; n.loaded = !0; n.version = '2.0'; n.queue = [];
+        t = b.createElement(e); t.async = !0; t.src = v; s = b.getElementsByTagName(e)[0]; s.parentNode.insertBefore(t, s);
+      }(window, document, 'script', 'https://connect.facebook.net/en_US/fbevents.js');
+      window.fbq('init', PIXEL);
+      window.fbq('track', 'PageView');
+    }
+    if (!ID || window.clarity) return;
     (function (c, l, a, r, i, t, y) {
       c[a] = c[a] || function () { (c[a].q = c[a].q || []).push(arguments); };
       t = l.createElement(r); t.async = 1; t.src = 'https://www.clarity.ms/tag/' + i;
@@ -421,13 +432,12 @@
       var v = b.getAttribute('data-cerez');
       yaz(v);
       serit.hidden = true;
-      if (v === 'evet') yukle();
-      // Onay geri alindiysa Clarity'nin bu sayfada calismasi durmaz; bir sonraki sayfada yuklenmez.
+      // "Reddet" bu sayfada yuklenmis olani durdurmaz; bir sonraki sayfadan itibaren hic yuklenmez.
     });
   });
   var secim = oku();
-  if (secim === 'evet') yukle();
-  else if (secim !== 'hayir') serit.hidden = false;
+  if (secim !== 'hayir') yukle();
+  if (secim !== 'evet' && secim !== 'hayir') serit.hidden = false;
 })();
 </script>
 <script>
